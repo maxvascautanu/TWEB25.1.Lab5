@@ -1,0 +1,32 @@
+{
+  "meta": {
+    "source": "Wikipedia — Real Madrid CF, Current squad",
+    "asOf": "2026-02-02"
+  },
+  "players": [
+    { "no": 1, "pos": "GK", "nation": "BEL", "player": "Thibaut Courtois", "notes": "" },
+    { "no": 2, "pos": "DF", "nation": "ESP", "player": "Dani Carvajal", "notes": "Captain" },
+    { "no": 3, "pos": "DF", "nation": "BRA", "player": "Éder Militão", "notes": "" },
+    { "no": 4, "pos": "DF", "nation": "AUT", "player": "David Alaba", "notes": "" },
+    { "no": 5, "pos": "MF", "nation": "ENG", "player": "Jude Bellingham", "notes": "" },
+    { "no": 6, "pos": "MF", "nation": "FRA", "player": "Eduardo Camavinga", "notes": "" },
+    { "no": 7, "pos": "FW", "nation": "BRA", "player": "Vinícius Júnior", "notes": "" },
+    { "no": 8, "pos": "MF", "nation": "URU", "player": "Federico Valverde", "notes": "Vice-captain" },
+    { "no": 10, "pos": "FW", "nation": "FRA", "player": "Kylian Mbappé", "notes": "" },
+    { "no": 11, "pos": "FW", "nation": "BRA", "player": "Rodrygo", "notes": "" },
+    { "no": 12, "pos": "DF", "nation": "ENG", "player": "Trent Alexander-Arnold", "notes": "" },
+    { "no": 13, "pos": "GK", "nation": "UKR", "player": "Andriy Lunin", "notes": "" },
+    { "no": 14, "pos": "MF", "nation": "FRA", "player": "Aurélien Tchouaméni", "notes": "" },
+    { "no": 15, "pos": "MF", "nation": "TUR", "player": "Arda Güler", "notes": "" },
+    { "no": 16, "pos": "FW", "nation": "ESP", "player": "Gonzalo García", "notes": "" },
+    { "no": 17, "pos": "DF", "nation": "ESP", "player": "Raúl Asencio", "notes": "" },
+    { "no": 18, "pos": "DF", "nation": "ESP", "player": "Álvaro Carreras", "notes": "" },
+    { "no": 19, "pos": "MF", "nation": "ESP", "player": "Dani Ceballos", "notes": "" },
+    { "no": 20, "pos": "DF", "nation": "ESP", "player": "Fran García", "notes": "" },
+    { "no": 21, "pos": "FW", "nation": "MAR", "player": "Brahim Díaz", "notes": "" },
+    { "no": 22, "pos": "DF", "nation": "GER", "player": "Antonio Rüdiger", "notes": "" },
+    { "no": 23, "pos": "DF", "nation": "FRA", "player": "Ferland Mendy", "notes": "" },
+    { "no": 24, "pos": "DF", "nation": "ESP", "player": "Dean Huijsen", "notes": "" },
+    { "no": 30, "pos": "FW", "nation": "ARG", "player": "Franco Mastantuono", "notes": "" }
+  ]
+}

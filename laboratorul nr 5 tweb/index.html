@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ro">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Real Madrid CF </title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        .spa-nav-active {
+            color: var(--gold) !important;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 2px;
+        }
+
+        header nav a {
+            text-decoration: none;
+            opacity: 0.92;
+        }
+
+        header nav a:hover {
+            opacity: 1;
+            color: var(--gold);
+        }
+
+        #spa-content {
+            min-height: 40vh;
+        }
+
+        #spa-ajax-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            z-index: 1000;
+            pointer-events: none;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            background-size: 40% 100%;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        body.spa-is-loading #spa-ajax-progress {
+            opacity: 1;
+            animation: spaAjaxShimmer 0.9s ease-in-out infinite;
+        }
+
+        @keyframes spaAjaxShimmer {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            100% {
+                background-position: 120% 50%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="spa-ajax-progress" aria-hidden="true"></div>
+    <header>
+        <div class="wrap">
+            <div class="topbar">
+                <div class="brand">
+                    <div class="logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg"
+                            alt="Sigla Real Madrid CF" />
+                    </div>
+                    <div>
+                        <div style="font-weight:900">Real Madrid CF</div>
+                    </div>
+                </div>
+                <nav>
+                    <a href="#/home" data-spa-nav="home">Acasă</a>
+                    <a href="#/prezentare" data-spa-nav="prezentare">Prezentare</a>
+                    <a href="#/date-cheie" data-spa-nav="date-cheie">Date cheie</a>
+                    <a href="#/palmares" data-spa-nav="palmares">Palmares</a>
+                    <a href="#/lot" data-spa-nav="lot">Lot</a>
+                    <a href="#/formular" data-spa-nav="formular">Înregistrare Fan</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div id="spa-content" class="wrap" style="padding-top:8px;padding-bottom:32px"></div>
+
+    <footer class="wrap" style="padding:20px 16px 40px;opacity:.75;font-size:13px">
+        © <span id="shell-year"></span> 
+    </footer>
+
+    <script src="spa.js"></script>
+</body>
+
+</html>

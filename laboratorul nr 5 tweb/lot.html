@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ro">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Real Madrid CF </title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <header>
+        <div class="wrap">
+            <div class="topbar">
+                <div class="brand">
+                    <div class="logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg" alt="Sigla Real Madrid CF" />
+                    </div>
+                    <div>
+                        <div style="font-weight:900">Real Madrid CF — Lot</div>
+                    </div>
+                </div>
+                <nav>
+                    <a href="index.html">Acasă</a>
+                    <a href="prezentare.html">Prezentare</a>
+                    <a href="date-cheie.html">Date cheie</a>
+                    <a href="palmares.html">Palmares</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="wrap">
+        <section>
+            <div class="sectionTitle">
+                <h2>Lotul actual — Current squad</h2>
+            </div>
+
+            <p id="squadAjaxStatus" class="small muted" style="min-height:1.35em;margin:0 0 10px" aria-live="polite"></p>
+
+            <div class="controls">
+                <div class="input" role="search">
+                    🔎 <input id="q" type="text" placeholder="Caută jucător (ex: Bellingham, Mbappé)..." />
+                </div>
+
+                <label class="small" for="pos">Poziție:</label>
+                <select id="pos">
+                <option value="ALL">Toate</option>
+                <option value="GK">GK</option>
+                <option value="DF">DF</option>
+                <option value="MF">MF</option>
+                <option value="FW">FW</option>
+            </select>
+
+                <label class="small" for="sort">Sortează:</label>
+                <select id="sort">
+                <option value="NO_ASC">Număr ↑</option>
+                <option value="NO_DESC">Număr ↓</option>
+                <option value="NAME_ASC">Nume A–Z</option>
+                <option value="NAME_DESC">Nume Z–A</option>
+            </select>
+
+                <button id="reset">Reset</button>
+            </div>
+
+            <div class="card" style="padding:12px">
+                <div class="small" style="margin-bottom:10px">
+                    Conform Wikipedia: <b>As of 2 February 2026</b> (Real Madrid CF — Current squad).
+                </div>
+
+                <table aria-label="Real Madrid current squad table">
+                    <thead>
+                        <tr>
+                            <th style="width:70px">No.</th>
+                            <th style="width:70px">Pos.</th>
+                            <th style="width:90px">Nation</th>
+                            <th>Player</th>
+                            <th style="width:170px">Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+
+                <div id="empty" class="small" style="display:none;margin-top:10px">
+                    Nu există rezultate pentru filtrul curent.
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            © <span id="year"></span>
+        </footer>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="ro">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Real Madrid CF — Înregistrare Fan</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        /* ── Form-specific extras ── */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        @media (max-width: 700px) { .form-grid { grid-template-columns: 1fr; } }
+
+        .field { display: flex; flex-direction: column; gap: 6px; }
+        .field.full { grid-column: 1 / -1; }
+
+        label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--muted);
+            letter-spacing: .06em;
+            text-transform: uppercase;
+        }
+        label span.req { color: var(--gold); margin-left: 3px; }
+
+        .field input,
+        .field select,
+        .field textarea {
+            width: 100%;
+            padding: 11px 14px;
+            border-radius: 12px;
+            border: 1px solid var(--line);
+            background: rgba(255,255,255,.05);
+            color: var(--text);
+            font-size: 14px;
+            font-family: inherit;
+            outline: none;
+            transition: border-color .2s, background .2s;
+        }
+        .field input:focus,
+        .field select:focus,
+        .field textarea:focus {
+            border-color: var(--gold);
+            background: rgba(212,175,55,.07);
+        }
+        .field textarea { resize: vertical; min-height: 90px; }
+
+        /* validation states */
+        .field input.ok, .field select.ok, .field textarea.ok {
+            border-color: #4ade80;
+        }
+        .field input.err, .field select.err, .field textarea.err {
+            border-color: #f87171;
+        }
+        .err-msg {
+            font-size: 11px;
+            color: #f87171;
+            min-height: 14px;
+            display: block;
+        }
+
+        /* checkboxes / radios */
+        .check-group { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+        .check-row { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+        .check-row input[type=checkbox],
+        .check-row input[type=radio] {
+            width: 16px; height: 16px;
+            accent-color: var(--gold);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .check-row span { font-size: 13px; color: var(--muted); }
+
+        /* submit */
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            border-radius: 14px;
+            border: 1px solid var(--gold);
+            background: linear-gradient(135deg, rgba(212,175,55,.25), rgba(212,175,55,.1));
+            color: var(--gold);
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: .05em;
+            cursor: pointer;
+            transition: background .2s, transform .1s;
+            margin-top: 6px;
+        }
+        .btn-submit:hover {
+            background: linear-gradient(135deg, rgba(212,175,55,.45), rgba(212,175,55,.2));
+        }
+        .btn-submit:active { transform: scale(.98); }
+
+        /* star-rating */
+        .stars { display: flex; flex-direction: row-reverse; gap: 4px; margin-top: 4px; }
+        .stars input { display: none; }
+        .stars label {
+            font-size: 24px; cursor: pointer; color: var(--line);
+            transition: color .15s;
+            text-transform: none; letter-spacing: 0;
+        }
+        .stars input:checked ~ label,
+        .stars label:hover,
+        .stars label:hover ~ label { color: var(--gold); }
+
+        /* success banner */
+        #successMsg {
+            display: none;
+            background: linear-gradient(135deg,rgba(74,222,128,.15),rgba(74,222,128,.05));
+            border: 1px solid #4ade80;
+            border-radius: var(--r);
+            padding: 20px 24px;
+            text-align: center;
+            margin-top: 16px;
+        }
+        #successMsg h3 { margin: 0 0 6px; color: #4ade80; font-size: 18px; }
+        #successMsg p  { margin: 0; color: var(--muted); font-size: 13px; }
+
+        /* counter */
+        .char-counter { font-size: 11px; color: var(--muted); text-align: right; }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="wrap">
+            <div class="topbar">
+                <div class="brand">
+                    <div class="logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg"
+                             alt="Sigla Real Madrid CF" />
+                    </div>
+                    <div>
+                        <div style="font-weight:900">Real Madrid CF — Înregistrare Fan</div>
+                    </div>
+                </div>
+                <nav>
+                    <a href="index.html">Acasă</a>
+                    <a href="prezentare.html">Prezentare</a>
+                    <a href="date-cheie.html">Date cheie</a>
+                    <a href="palmares.html">Palmares</a>
+                    <a href="lot.html">Lot</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="wrap">
+        <section>
+            <div class="sectionTitle">
+                <h2>⚽ Înregistrare Fan Real Madrid</h2>
+                <span class="muted">Completează datele și trimite formularul</span>
+            </div>
+
+            <!-- ═══ FORM ═══ -->
+            <div class="card" style="padding:24px">
+                <form id="fanForm"
+                      action="php/formular.php"
+                      method="POST"
+                      novalidate>
+
+                    <div class="form-grid">
+
+                        <!-- Prenume -->
+                        <div class="field">
+                            <label for="prenume">Prenume<span class="req">*</span></label>
+                            <input type="text" id="prenume" name="prenume"
+                                   placeholder="ex: Alexandru"
+                                   autocomplete="given-name" />
+                            <span class="err-msg" id="err-prenume"></span>
+                        </div>
+
+                        <!-- Nume -->
+                        <div class="field">
+                            <label for="nume">Nume de familie<span class="req">*</span></label>
+                            <input type="text" id="nume" name="nume"
+                                   placeholder="ex: Ionescu"
+                                   autocomplete="family-name" />
+                            <span class="err-msg" id="err-nume"></span>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="field">
+                            <label for="email">Email<span class="req">*</span></label>
+                            <input type="email" id="email" name="email"
+                                   placeholder="ex: fan@email.com"
+                                   autocomplete="email" />
+                            <span class="err-msg" id="err-email"></span>
+                        </div>
+
+                        <!-- Telefon -->
+                        <div class="field">
+                            <label for="telefon">Telefon</label>
+                            <input type="tel" id="telefon" name="telefon"
+                                   placeholder="ex: +373 69 123 456"
+                                   autocomplete="tel" />
+                            <span class="err-msg" id="err-telefon"></span>
+                        </div>
+
+                        <!-- Țara -->
+                        <div class="field">
+                            <label for="tara">Țara<span class="req">*</span></label>
+                            <select id="tara" name="tara">
+                                <option value="">— Selectează —</option>
+                                <option value="MD">Moldova</option>
+                                <option value="RO">România</option>
+                                <option value="ES">Spania</option>
+                                <option value="DE">Germania</option>
+                                <option value="FR">Franța</option>
+                                <option value="GB">Marea Britanie</option>
+                                <option value="US">SUA</option>
+                                <option value="BR">Brazilia</option>
+                                <option value="AR">Argentina</option>
+                                <option value="OTHER">Alta</option>
+                            </select>
+                            <span class="err-msg" id="err-tara"></span>
+                        </div>
+
+                        <!-- Vârstă -->
+                        <div class="field">
+                            <label for="varsta">Vârsta<span class="req">*</span></label>
+                            <input type="number" id="varsta" name="varsta"
+                                   placeholder="ex: 25" min="5" max="120" />
+                            <span class="err-msg" id="err-varsta"></span>
+                        </div>
+
+                        <!-- Jucător favorit -->
+                        <div class="field">
+                            <label for="jucator">Jucător favorit<span class="req">*</span></label>
+                            <select id="jucator" name="jucator">
+                                <option value="">— Selectează —</option>
+                                <option value="Vinícius Júnior">Vinícius Júnior (#7)</option>
+                                <option value="Kylian Mbappé">Kylian Mbappé (#10)</option>
+                                <option value="Jude Bellingham">Jude Bellingham (#5)</option>
+                                <option value="Thibaut Courtois">Thibaut Courtois (#1)</option>
+                                <option value="Federico Valverde">Federico Valverde (#8)</option>
+                                <option value="Rodrygo">Rodrygo (#11)</option>
+                                <option value="Aurélien Tchouaméni">Aurélien Tchouaméni (#14)</option>
+                                <option value="Antonio Rüdiger">Antonio Rüdiger (#22)</option>
+                                <option value="Arda Güler">Arda Güler (#15)</option>
+                                <option value="Trent Alexander-Arnold">Trent Alexander-Arnold (#12)</option>
+                                <option value="Altul">Altul</option>
+                            </select>
+                            <span class="err-msg" id="err-jucator"></span>
+                        </div>
+
+                        <!-- Fidelitate (ani) -->
+                        <div class="field">
+                            <label for="ani">Fan Real Madrid de (ani)<span class="req">*</span></label>
+                            <input type="number" id="ani" name="ani_fan"
+                                   placeholder="ex: 10" min="0" max="100" />
+                            <span class="err-msg" id="err-ani"></span>
+                        </div>
+
+                        <!-- Rating -->
+                        <div class="field full">
+                            <label>Cât de mult iubești Real Madrid?<span class="req">*</span></label>
+                            <div class="stars">
+                                <input type="radio" id="s5" name="rating" value="5"><label for="s5" title="5 stele">★</label>
+                                <input type="radio" id="s4" name="rating" value="4"><label for="s4" title="4 stele">★</label>
+                                <input type="radio" id="s3" name="rating" value="3"><label for="s3" title="3 stele">★</label>
+                                <input type="radio" id="s2" name="rating" value="2"><label for="s2" title="2 stele">★</label>
+                                <input type="radio" id="s1" name="rating" value="1"><label for="s1" title="1 stea">★</label>
+                            </div>
+                            <span class="err-msg" id="err-rating"></span>
+                        </div>
+
+                        <!-- Competiții urmărite -->
+                        <div class="field full">
+                            <label>Competiții urmărite<span class="req">*</span></label>
+                            <div class="check-group" id="competitii">
+                                <label class="check-row">
+                                    <input type="checkbox" name="competitii" value="LaLiga">
+                                    <span>🏆 La Liga</span>
+                                </label>
+                                <label class="check-row">
+                                    <input type="checkbox" name="competitii" value="UCL">
+                                    <span>⭐ UEFA Champions League</span>
+                                </label>
+                                <label class="check-row">
+                                    <input type="checkbox" name="competitii" value="CopaDelRey">
+                                    <span>🥇 Copa del Rey</span>
+                                </label>
+                                <label class="check-row">
+                                    <input type="checkbox" name="competitii" value="Supercopa">
+                                    <span>🏅 Supercopa de España</span>
+                                </label>
+                            </div>
+                            <span class="err-msg" id="err-competitii"></span>
+                        </div>
+
+                        <!-- Mesaj -->
+                        <div class="field full">
+                            <label for="mesaj">Mesaj / Comentariu</label>
+                            <textarea id="mesaj" name="mesaj"
+                                      placeholder="Scrie ceva despre pasiunea ta pentru Real Madrid... (max 500 caractere)"
+                                      maxlength="500"></textarea>
+                            <div class="char-counter"><span id="charCount">0</span> / 500</div>
+                            <span class="err-msg" id="err-mesaj"></span>
+                        </div>
+
+                        <!-- Termeni -->
+                        <div class="field full">
+                            <label class="check-row" id="termeniLabel">
+                                <input type="checkbox" id="termeni" name="termeni" value="da">
+                                <span>Accept termenii și condițiile<span class="req">*</span></span>
+                            </label>
+                            <span class="err-msg" id="err-termeni"></span>
+                        </div>
+
+                    </div><!-- /form-grid -->
+
+                    <div style="height:8px"></div>
+                    <button type="submit" class="btn-submit">
+                        ✉️ Trimite Înregistrarea
+                    </button>
+
+                </form>
+
+                <!-- Success banner (shown after JS submit) -->
+                <div id="successMsg">
+                    <h3>✅ Înregistrare trimisă cu succes!</h3>
+                    <p>Mulțumim că ești fan Real Madrid! Datele tale au fost salvate.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            © <span id="year"></span> 
+        </footer>
+    </main>
+
+    <script src="app.js"></script>
+    <script src="formular.js"></script>
+</body>
+</html>
